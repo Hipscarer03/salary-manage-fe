@@ -1,0 +1,305 @@
+/* Reset nhẹ */
+* {
+  box-sizing: border-box;
+}
+
+/* Removed candidate-filter-searchbar styles as they are consolidated in candidate.css */
+
+/* ===== TABLE BASE ===== */
+.salary-composition-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.salary-composition-table thead th,
+.ant-table-thead > tr > th {
+  position: sticky !important;
+  top: 0 !important;
+  background-color: #f8f9fb !important;
+  font-weight: 700;
+  text-align: left;
+  padding: 0 14px !important;
+  height: 36px !important;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+  z-index: 100 !important;
+  color: #212121;
+}
+
+.ant-table {
+  background: transparent !important;
+}
+
+.ant-table-container {
+  border-radius: 0 !important;
+}
+
+/* ===== BODY ===== */
+.salary-composition-table tbody td {
+  padding: 0 14px !important;
+  height: 36px !important;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* Hover row */
+.salary-composition-table tbody tr:hover,
+.salary-composition-table tbody tr:hover > td,
+.salary-composition-table .ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: var(--ms-color-primary-light-default) !important;
+}
+
+/* Selected row (checked checkbox) – same color as hover */
+.salary-composition-table .ant-table-tbody > tr.ant-table-row-selected > td,
+.salary-composition-table .ant-table-tbody > tr.ant-table-row-selected:hover > td {
+  background-color: var(--ms-color-primary-light-default) !important;
+}
+
+/* Checkbox trong bảng → màu xanh lá theme */
+.salary-composition-table .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #0e9a62 !important;
+  border-color: #0e9a62 !important;
+}
+
+.salary-composition-table .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.salary-composition-table .ant-checkbox:hover .ant-checkbox-inner {
+  border-color: #0e9a62 !important;
+}
+
+.salary-composition-table .ant-checkbox-checked::after {
+  border-color: #0e9a62 !important;
+}
+
+.salary-composition-table .ant-checkbox-indeterminate .ant-checkbox-inner {
+  background-color: #0e9a62 !important;
+  border-color: #0e9a62 !important;
+}
+
+.salary-composition-table .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 16px !important;
+  height: 16px !important;
+  transform: translate(-50%, -50%) !important;
+  background-color: #ffffff !important;
+  mask-image: url('/Icon.svg') !important;
+  -webkit-mask-image: url('/Icon.svg') !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-position: -102px -42px !important;
+  -webkit-mask-position: -102px -42px !important;
+}
+
+/* On hover, make the last cell of the row sticky to the right so it behaves absolutely at the end of the viewport */
+.salary-composition-table tbody tr.row-item:hover td:last-child,
+.salary-composition-table tbody tr.row-item:hover .ant-table-cell:last-child {
+  position: sticky !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  background-color: var(--ms-color-primary-light-default) !important;
+}
+
+/* ===== TEXT ALIGN (OPTIONAL) ===== */
+/* Removed blue color for first-child td as requested */
+
+.cell.edit,
+.cell.delete {
+  text-align: center;
+}
+
+.action-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* placeholder – bạn gắn icon bằng background / mask / svg */
+.edit-icon {
+  background-image: url(/svg/edit.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.delete-icon {
+  background-image: url(/svg/delete.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+/* Wrapper pagination */
+.content_pagination {
+  position: relative;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid #e5e7eb;
+  background-color: #ffffff !important;
+  font-size: 14px;
+  color: #374151;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Right side (tổng bản ghi, nếu có) */
+.content_pagination_right {
+  width: 200px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.content_pagination_right span {
+  font-weight: 800;
+}
+
+/* Left side */
+.content_pagination_left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Text: Số bản ghi/trang */
+.pagesize-text {
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* Select wrapper */
+.pagesize-button {
+  display: flex;
+  align-items: center;
+  width: 80px;
+}
+
+.pagesize-button :deep(.ant-select-selector) {
+  height: 32px !important;
+  border-radius: 6px !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Hover + focus */
+.pagesize-button select:hover {
+  border-color: #9ca3af;
+}
+
+.pagesize-button select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Page number (vd: 1 - 25 bản ghi) */
+.page-number {
+  color: #374151;
+  white-space: nowrap;
+}
+
+.content_pagination_prev {
+  mask: url('/svg/icon/Arrows.svg') no-repeat -143px -421px;
+  -webkit-mask: url('/svg/icon/Arrows.svg') no-repeat -143px -421px;
+  background-color: #717680;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.content_pagination_next {
+  mask: url('/svg/icon/Arrows.svg') no-repeat -191px -421px;
+  -webkit-mask: url('/svg/icon/Arrows.svg') no-repeat -191px -421px;
+  background-color: #717680;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.content_pagination_start {
+  mask: url('/svg/icon/Arrows.svg') no-repeat -46px -661px;
+  -webkit-mask: url('/svg/icon/Arrows.svg') no-repeat -46px -661px;
+  background-color: #717680;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.content_pagination_end {
+  mask: url('/svg/icon/Arrows.svg') no-repeat -92px -660px;
+  -webkit-mask: url('/svg/icon/Arrows.svg') no-repeat -92px -660px;
+  background-color: #717680;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.disabled {
+  background-color: #d6d8da;
+  cursor: not-allowed;
+}
+
+/* Force table and wrapper to take full height of the container to prevent vertical shrinking and keep scrollbars pinned at the bottom */
+.content_body_wrapper .content_body {
+  height: 100% !important;
+}
+
+.salary-composition-table {
+  height: 100%;
+}
+
+.salary-composition-table .ant-table-wrapper,
+.salary-composition-table .ant-spin-nested-loading,
+.salary-composition-table .ant-spin-container,
+.salary-composition-table .ant-table,
+.salary-composition-table .ant-table-container {
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.salary-composition-table .ant-table-body {
+  flex: 1 !important;
+  min-height: 0;
+  height: auto !important; /* Override hardcoded height from scroll.y settings */
+}
+
+/* Custom premium scrollbar styling */
+.ant-table-body::-webkit-scrollbar,
+.salary-composition-table ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.ant-table-body::-webkit-scrollbar-track,
+.salary-composition-table ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb,
+.salary-composition-table ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+  border: 2px solid #f1f5f9; /* Creates a nice padding effect around the thumb */
+}
+
+.ant-table-body::-webkit-scrollbar-thumb:hover,
+.salary-composition-table ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

@@ -1,0 +1,362 @@
+@import './variable.css';
+
+.icon-global {
+  background-color: #717680;
+  -webkit-mask: url('https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg') 7px -602px no-repeat;
+  /* width: 10px;
+  height: 10px; */
+}
+
+.sidebar_menu_item_icon {
+  width: 20px;
+  height: 20px;
+  /* filter: invert(1); */
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+/* 
+.icon:hover {
+  background-color: #e5e5e5;
+} */
+.dropdown-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* navbar */
+.narbar_left_switch_icon_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 12px;
+}
+
+
+.narbar_left_switch_icon {
+  mask: url('./Icon.svg') no-repeat -82px -82px;
+  background-color: white;
+  height: 16px;
+  width: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.navbar_left_logo_icon {
+  background-image: url('https://testcdnamisapp.misacdn.net/apps/payroll/static/logos/icon-payroll-logo.svg?v=');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 32px;
+  height: 32px;
+}
+
+.navbar_left_dropdown_icon {
+  mask: url('./svg/others/ArrowDown.svg') no-repeat center;
+  background-color: #ffffff;
+  color: #ffffff;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  display: block;
+}
+
+/* icon navbar right */
+.navbar_right_notification_icon {
+  background-image: url('https://amisplatform.misacdn.net/apps/recruit/icon-notification-version.d5e3dc604036ed5b.svg');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.navbar_right_store_icon {
+  background-image: url('https://cdnstore.misacdn.net/lib/static/cs-icon-store.svg');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.navbar_right_options .icon {
+  background-size: 20px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.navbar_right_options .icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar_right_settings_icon {
+  mask: url(/svg/icon/System.svg) no-repeat no-repeat -35px -652px;
+  background-color: #ffffff;
+  filter: none;
+  width: 20px;
+}
+
+
+.navbar_right_chat_icon {
+  background-image: url('/svg/others/Subtract.png');
+}
+
+.navbar_right_noti_icon {
+  background-image: url('./svg/others/Nofi.png');
+}
+
+.navbar_right_help_icon {
+  background-image: url('/svg/question.png');
+  filter: brightness(0) invert(1);
+
+}
+
+.navbar_right_more_icon {
+  background-image: url('/svg/more.png');
+  filter: brightness(0) invert(1);
+
+}
+
+.navbar_right_support_icon {
+  background-image: url('/svg/others/iconChat.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.navbar_right_account_dropdown {
+  mask: url('https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg') no-repeat -33px -48px;
+  background-color: #ffffff;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+/* sidebar */
+.icon-dashboard {
+  mask: url('/svg/others/IconDashboard.svg') no-repeat;
+  background-color: #717680;
+  scale: 1.3;
+}
+
+.icon-report {
+  mask: url('/svg/icon/Charts.svg') no-repeat -137px -130px;
+  background-color: #717680;
+}
+
+.icon-invoice {
+  mask: url('/svg/icon/Document.svg') no-repeat -570px -322px;
+  width: 20px;
+  height: 20px;
+  background-color: #717680;
+}
+
+.icon-warehouse {
+  mask: url('/svg/icon/IconsCUKCUK.svg') no-repeat -67px -98px;
+  background-color: #717680;
+  scale: 1.1;
+}
+
+.icon-wallet {
+  mask: url('/svg/others/IconWallet.svg') no-repeat center;
+  background-color: #717680;
+  scale: 1.2;
+}
+
+.icon-menu {
+  mask: url('/svg/icon/IconsCUKCUK.svg') no-repeat -234px -68px;
+  background-color: #717680;
+}
+
+.icon-gift {
+  mask: url('/svg/icon/Other.svg') no-repeat -330px -370px;
+  background-color: #717680;
+}
+
+.icon-order {
+  mask: url('/svg/icon/Devices.svg') no-repeat -42px -659px;
+  background-color: #717680;
+}
+
+.icon-global {
+  mask: url('/svg/icon/Other.svg') no-repeat -1050px -706px;
+  background-color: #717680;
+}
+
+.icon-tax {
+  mask: url('/svg/icon/Document.svg') no-repeat -570px -322px;
+  background-color: #717680;
+}
+
+.icon-layer {
+  background-image: url('/svg/others/logoLomas.svg');
+  background-size: contain;
+  background-position: center;
+}
+
+.icon-category {
+  mask: url('/svg/icon/System.svg') no-repeat -715px -517px;
+  background-color: #717680;
+}
+
+.icon-setting {
+  mask: url('/svg/icon/System.svg') no-repeat -42px -658px;
+  background-color: #717680;
+  width: 20px;
+}
+
+.icon-app {
+  mask: url('/svg/icon/Devices.svg') no-repeat -43px -659px;
+  background-color: #717680;
+}
+
+.icon-loan {
+  background-image: url('/svg/others/Lending.svg');
+  background-size: contain;
+  background-position: center;
+}
+
+.icon-accounting {
+  background-image: url('/svg/others/ASP.png');
+  background-size: contain;
+  background-position: center;
+}
+
+.icon-product {
+  mask: url('/svg/icon/IconsCUKCUK.svg') no-repeat -181px -69px;
+  background-color: var(--theme-color);
+}
+
+/* Removed active icon style */
+
+.sidebar_menu_dropdown_icon {
+  mask: url('./svg/others/ArrowDown.svg') no-repeat center;
+  background-color: #717680;
+  width: 14px;
+  height: 14px;
+  margin-left: auto;
+}
+
+.sidebar_toggle_icon {
+  mask: url('./svg/others/Toggle.svg') no-repeat center;
+  background-color: #717680;
+  width: 14px;
+  height: 14px;
+}
+
+.collapsed .sidebar_toggle_icon {
+  transform: rotate(180deg);
+}
+
+/* table */
+/* header table*/
+.remove-candidate-icon {
+  background-image: url('https://amisplatform.misacdn.net/apps/recruit/assets/icons/icon-delete-candidate.svg');
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.add-new-icon {
+  mask: url('https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg') no-repeat -21px -658px;
+  background-color: #ffffff;
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown-icon {
+  mask: url('https://amisplatform.misacdn.net/apps/recruit2/assets/images/ICON.svg') no-repeat -33px -48px;
+  background-color: #ffffff;
+  width: 16px;
+  height: 16px;
+  scale: 1.5;
+}
+
+.refresh-icon-gray {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3E%3Cpath d='M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z'/%3E%3C/svg%3E");
+}
+
+.export-icon-gray {
+  mask: url('/svg/others/ExportIcon.svg') no-repeat center;
+  background-color: #717680;
+  width: 20px;
+}
+
+.setting-icon-gray {
+  mask: url('/svg/icon/System.svg') no-repeat -41px -658px;
+  background-color: #717680;
+  width: 20px;
+}
+
+.filter-icon-gray {
+  mask: url('/svg/others/FilterIcon.svg') no-repeat center;
+  background-color: #717680;
+  width: 20px;
+}
+
+/* Sidebar Payroll Icons */
+.icon-home {
+  mask: url('/svg/others/Home.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.icon-salary-compositions {
+  mask: url('./Icon.svg')  no-repeat -121px -778px;;
+  background-color: #717680;
+}
+
+.icon-payroll-templates {
+  mask: url('/svg/others/PayrollTemplates.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.icon-payroll-data {
+  mask: url('/svg/others/PayrollData.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.icon-calculate-salary {
+  mask: url('/svg/others/CalculateSalary.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.icon-payout {
+  mask: url('/svg/others/Payout.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.icon-reports {
+  mask: url('/svg/others/Reports.svg') no-repeat center;
+  background-color: #717680;
+}
+
+.category-system-icon {
+  mask: url('/svg/others/CategorySystem.svg') no-repeat center;
+  background-color: #717680;
+  width: 16px;
+  height: 16px;
+}

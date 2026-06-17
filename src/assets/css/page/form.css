@@ -1,0 +1,190 @@
+.form_add_bg {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* display: none; */
+}
+
+.form_add_content {
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  width: 560px;
+  height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 0 24px;
+  /* display: none; */
+}
+
+.form_add_content.active, .form_add_bg.active {
+  display: block;
+}
+
+.icon-close {
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-image: url('/svg/close.png');
+}
+
+/* ===== Popup ===== */
+.form_add_content_container {
+  background: #fff;
+  border-radius: 8px;
+
+}
+
+/* ===== Header ===== */
+.form_add_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.form_add_header_title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* .form_add_header_close {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+} */
+
+/* ===== Import file ===== */
+.form_add_import-file {
+  margin: 16px 0;
+  padding: 20px;
+  border: 2px dashed #d0d7de;
+  border-radius: 6px;
+  text-align: center;
+  color: #2563eb;
+  font-size: 14px;
+}
+
+/* ===== Content layout ===== */
+.form_add_content_container {
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 80vh;
+  min-height: 0;
+}
+
+.form_add_content_col_avatar {
+  width: 63px;
+  height: 63px;
+  border-radius: 50%;
+  border: 1px dashed #ccc;
+  margin-right: 12px;
+
+}
+
+/* ===== Form info ===== */
+.form_add_content_col_infor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  gap: 16px 24px;
+
+}
+
+/* full width row */
+.form_add_content_row {
+  grid-column: span 2;
+}
+
+.form_add_content_row_title {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.form_add_content_row_input input,
+.form_add_content_row_input select {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.form_add_content_row_input input:focus,
+.form_add_content_row_input select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ===== Buttons ===== */
+.form_add_content_buttons {
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  width: 100%;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #f1f2f5;
+  padding: 10px 16px;
+  border-top: #ccc solid 1px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.form_add_content_button {
+  min-width: 90px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.form_add_content_button--secondary {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.form_add_content_button--primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.form_add_content_button--primary:hover {
+  background: #1d4ed8;
+}
+
+/* transform */
+/* .form_add_content_container {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.form_add_content_container.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+} */

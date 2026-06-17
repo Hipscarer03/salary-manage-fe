@@ -1,0 +1,28 @@
+@import url('https://testcdnamisapp.misacdn.net/fonts/font.inter.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.body {
+  font-family: Inter, Helvetica, Arial, sans-serif !important;
+}
+
+/* Restore DevExtreme icon font-family when overridden by universal selector * font-family rule */
+.dx-icon,
+.dx-checkbox-icon,
+.dx-treeview-toggle-item-indicator,
+.dx-dropdowneditor-icon,
+.dx-icon::before,
+.dx-checkbox-icon::before,
+.dx-treeview-toggle-item-indicator::before,
+.dx-dropdowneditor-icon::before {
+  font-family: 'DXIcons' !important;
+}

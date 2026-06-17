@@ -1,0 +1,109 @@
+.ms-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.ms-modal-content {
+  width: 444px;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ms-modal-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ms-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #212121;
+}
+
+.ms-modal-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon-help-blue {
+  mask: url('/svg/others/Help.svg') no-repeat center;
+  background-color: #2680eb;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.icon-close-gray {
+  mask: url('/svg/others/X.png') no-repeat center;
+  background-color: #717680;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.ms-modal-body {
+  padding: 0 20px 20px 20px;
+}
+
+.ms-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ms-form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ms-label {
+  width: 100px;
+  font-size: 14px;
+  color: #212121;
+}
+
+.ms-label span {
+  color: #ef4444;
+}
+
+.ms-input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.ms-modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+:deep(.ms-button--secondary:hover) {
+  border-color: #2680eb !important;
+  color: #2680eb !important;
+  background-color: #fff !important;
+}
+
+.btn-save {
+  min-width: 80px;
+  background-color: #0062cc !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-save:hover {
+  border: 1px solid #1e70d1 !important;
+}

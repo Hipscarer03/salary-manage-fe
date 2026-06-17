@@ -1,0 +1,14 @@
+@import url("../variable.css");
+
+input {
+    border: 1px solid var( --border-control-color);
+    height: 32px;
+    outline : none;
+    border-radius: 3px;
+    padding: 0 10px; 
+}
+/* //check padding mặc định của input */
+
+input:hover {
+    border: 1px solid var(--border-control-hover) !important;
+}

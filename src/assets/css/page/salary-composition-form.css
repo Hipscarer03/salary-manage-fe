@@ -1,0 +1,504 @@
+/* salary-composition-form.css */
+.salary-composition-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f1f2f5;
+}
+
+.salary-composition-form-header {
+  height: 56px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.salary-composition-form-back-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.salary-composition-form-back-btn:hover {
+  border: 1px solid #2680eb;
+}
+
+.salary-composition-form-back-btn i {
+  mask: url('/svg/others/Back.svg') no-repeat center;
+  background-color: #666;
+  width: 16px;
+  height: 16px;
+  scale: 1.2;
+}
+
+.salary-composition-form-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #212121;
+}
+
+.salary-composition-form-type-select {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #666;
+  background-color: #f5f5f5;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  padding: 7px 12px;
+  width: fit-content;
+  height: 32px;
+}
+
+.salary-composition-form-type-select :deep(.ms-select) {
+  width: 100px !important;
+}
+
+.salary-composition-form-type-select :deep(.ant-select-selector) {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding-left: 4px !important;
+  color: #212121 !important;
+  font-weight: 500 !important;
+}
+
+.salary-composition-form-tabs {
+  height: 48px;
+  background-color: #fff;
+  display: flex;
+  padding: 0 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.salary-composition-form-tab-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  position: relative;
+}
+
+.salary-composition-form-tab-item.active {
+  color: #2680eb;
+  font-weight: 700;
+}
+
+.salary-composition-form-tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #2680eb;
+}
+
+.salary-composition-form-body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.salary-composition-form-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.salary-composition-form-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #212121;
+}
+
+.salary-composition-form-layout {
+  display: flex;
+  gap: 90px;
+}
+
+.salary-composition-form-avatar-pane {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.salary-composition-form-avatar-box {
+  width: 160px;
+  height: 120px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.salary-composition-form-avatar-box i {
+  width: 160px;
+  height: 120px;
+  background-image: url('./svg/others/Image.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.salary-composition-form-avatar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.salary-composition-form-info-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.salary-composition-form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.salary-composition-form-label {
+  width: 200px;
+  font-size: 14px;
+  color: #212121;
+  padding-top: 8px;
+}
+
+.salary-composition-form-label span {
+  color: red;
+}
+
+.salary-composition-form-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.salary-composition-form-input-wrapper input,
+.salary-composition-form-input-wrapper select,
+.salary-composition-form-input-wrapper textarea {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.salary-composition-form-input-wrapper textarea {
+  height: 80px;
+  padding: 8px 12px;
+}
+
+.salary-composition-form-input-wrapper input:focus {
+  border-color: #2680eb;
+}
+
+.salary-composition-form-footer {
+  height: 56px;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 16px;
+  gap: 8px;
+}
+
+.btn-secondary {
+  height: 36px;
+  padding: 0 24px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: #2680eb !important;
+  color: #2680eb !important;
+}
+
+.btn-primary {
+  height: 36px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--theme-color);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-icon-circular {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #dcdfe6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  cursor: pointer;
+}
+
+.btn-icon-circular:hover {
+  border-color: #2680eb;
+}
+
+.ms-button {
+  border-radius: 8px;
+}
+
+.icon-upload {
+  mask: url('./svg/others/Upload.png') no-repeat center;
+  background-color: #d5d7da;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-more-gray {
+  background-image: url(./svg/others/Threedots.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 16px;
+  height: 16px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-delete-red {
+  border: 1px solid #d5d7da;
+}
+
+.btn-delete-red:hover {
+  border-color: #ef4444;
+}
+
+/* Service Preferences Styles */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #f0f7ff;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.icon-info-blue {
+  mask: url('./svg/others/Info.svg') no-repeat center;
+  background-color: var(--theme-color);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-box span {
+  font-size: 13px;
+  color: #2680eb;
+  line-height: 1.5;
+}
+
+.preference-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.preference-search-wrapper {
+  margin: 12px 16px;
+  width: 240px;
+}
+
+.search-input-unify {
+  width: 320px;
+}
+
+.preference-table-footer {
+  padding: 8px 0 0 0;
+}
+
+.preference-table-wrapper {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.ms-table-simple {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ms-table-simple th {
+  height: 32px;
+  text-align: left;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #212121;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+}
+
+.ms-table-simple th:last-child {
+  border-right: none;
+}
+
+.ms-table-simple td {
+  padding: 0 8px;
+  border-bottom: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  height: 32px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.ms-table-simple td:last-child {
+  border-right: none;
+}
+
+.ms-table-simple tr:last-child td {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ms-table-simple tr:hover {
+  background-color: #f0f6fe;
+}
+
+.addition-option-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.addition-option-price {
+  color: #717680;
+  font-size: 12px;
+}
+
+.preference-price-cell {
+  padding: 0 !important;
+}
+
+.row-cell-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.row-cell-content {
+  flex: 1;
+  padding: 0 8px;
+}
+
+.row-cell-content :deep(.ant-input),
+.row-cell-content :deep(.ms-input__container),
+.ms-table-simple :deep(.ant-select-selector),
+.ms-table-simple :deep(.ms-combobox__container) {
+  border: none !important;
+  text-align: left !important;
+  padding-left: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  height: 32px !important;
+}
+
+.row-actions {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  background: linear-gradient(to left, #f0f6fe 80%, transparent);
+  padding: 0 8px;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.ms-table-simple tr:hover .row-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.action-btn:hover {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.icon-delete-red-small {
+  display: inline-block;
+  mask: url('/svg/table/IconTrash.svg') no-repeat center;
+  -webkit-mask: url('/svg/table/IconTrash.svg') no-repeat center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: #ef4444;
+  width: 16px;
+  height: 16px;
+}
+
+.btn-add-row {
+  border: 1px solid #dcdfe6;
+  background: #fff;
+  height: 32px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #212121;
+}
+
+.btn-add-row:hover {
+  background-color: #f5f5f5;
+}
+
+.plus-icon {
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+}

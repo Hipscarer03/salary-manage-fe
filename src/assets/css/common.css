@@ -1,0 +1,229 @@
+@import './variable.css';
+
+/* narbar */
+.navbar {
+  position: absolute;
+  height: 48px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* css trong */
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--theme-color);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+/* navbar left */
+.navbar_left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.narbar_left_title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 12px;
+  margin-right: 24px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.navbar_left_restaurant {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.navbar_left_restaurant:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar_left_restaurant_text {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* right */
+.navbar_right {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  height: 100%;
+}
+
+.navbar_search {
+  display: flex;
+  align-items: center;
+  background-color: #fff3;
+  border-radius: 8px;
+  height: 32px;
+  width: 300px;
+  padding: 0 8px;
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.navbar_search_icon {
+  width: 16px;
+  height: 16px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E")
+    no-repeat center;
+  background-color: #ffffff;
+  margin-right: 8px;
+}
+
+.navbar_search_input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #ffffff;
+  font-size: 13px;
+  width: 100%;
+  padding: 0;
+}
+
+.navbar_search_input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar_right_options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.navbar_right_account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar_right_account_img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* sidebar */
+.sidebar {
+  height: calc(100% - 48px);
+  position: absolute;
+  width: 200px;
+  top: 47px;
+  bottom: 0;
+  background-color: #ffffff;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* toggle  */
+.sidebar.collapsed {
+  width: 72px;
+}
+
+.sidebar_menu {
+  height: calc(100% - 48px);
+  padding: 14px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar_menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar_menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar_menu::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
+.sidebar_menu::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background-color: #f0f0f0;
+  margin: 4px 12px;
+}
+
+.sidebar_menu_list {
+  height: calc(100% - 40px);
+}
+
+.sidebar_menu_item {
+  display: flex;
+  align-items: center;
+  margin: 4px 12px;
+  padding: 6px 12px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.sidebar_menu_item_title {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap !important;
+  margin-left: 12px;
+  color: #101828;
+}
+
+.sidebar.collapsed .sidebar_menu_item_title {
+  display: none;
+}
+
+.sidebar_menu_item:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Removed active menu styles */
+
+.sidebar_toggle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+  border-top-left-radius: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  z-index: 10;
+}
+
+.sidebar_toggle:hover {
+  background-color: #f5f5f5;
+}
+
+.sidebar.collapsed .sidebar_toggle {
+  justify-content: center;
+}
+
+/* collapsed khi click toggle */
+/* .sidebar_toggle.collapsed .sidebar_menu_item_title {
+  display: none;
+} */
+
+/* removed old redundant scrollbar styles */
