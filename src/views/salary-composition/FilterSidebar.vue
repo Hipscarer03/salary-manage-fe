@@ -130,7 +130,7 @@ const otherFilters = [
 
 .filter-search-input {
   width: 100%;
-  height: 36px;
+  height: 32px;
   border: 1px solid #dcdfe6;
   border-radius: 8px;
   padding: 0 12px 0 36px;

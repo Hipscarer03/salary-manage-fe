@@ -1,7 +1,7 @@
 <template>
   <div class="ms-input" :class="[className]">
     <label v-if="label" class="ms-input__label">{{ label }}</label>
-    <div class="ms-input__container" :class="{ 'error-border': error }">
+    <div class="ms-input__container" :class="{ 'error-border': error, 'ms-input__container--disabled': isDisabled }">
       <a-input
         v-bind="$attrs"
         :placeholder="placeholder"
@@ -32,7 +32,10 @@ export default {
 </script>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
+import { defineProps, defineEmits, computed, useAttrs } from 'vue'
+
+const attrs = useAttrs()
+const isDisabled = computed(() => attrs.disabled !== undefined && attrs.disabled !== null && attrs.disabled !== false)
 
 const props = defineProps({
   label: {
@@ -155,10 +158,20 @@ const handleInput = (event) => {
   align-items: center;
   border: 1px solid #dcdfe6;
   border-radius: 8px;
-  height: 36px;
+  height: 32px;
   background-color: #fff;
   transition: all 0.2s;
   overflow: hidden;
+}
+
+.ms-input__container--disabled {
+  background-color: #f5f5f5 !important;
+  cursor: not-allowed !important;
+}
+
+.ms-input__container--disabled :deep(.ant-input) {
+  background-color: transparent !important;
+  cursor: not-allowed !important;
 }
 
 .ms-input__container:hover {

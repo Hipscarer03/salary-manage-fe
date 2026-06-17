@@ -33,6 +33,7 @@
           <div class="salary-composition-form-input-wrapper">
             <ms-input
               v-model="formData.salaryCompositionCode"
+              :disabled="!!editData && !isDuplicate"
               :error="errors.salaryCompositionCode"
               class="w-300"
               maxlength="50"
@@ -46,7 +47,7 @@
         <div class="salary-composition-form-row">
           <div class="salary-composition-form-label">Đơn vị áp dụng <span>*</span></div>
           <div class="salary-composition-form-input-wrapper">
-            <div style="width: 100%; display: flex; flex-direction: column;">
+            <div style="width: 100%; display: flex; flex-direction: column">
               <dx-drop-down-box
                 v-model:value="formData.unitIds"
                 value-expr="unitId"
@@ -63,9 +64,9 @@
                 <template #field="{ value }">
                   <div class="unit-tag-field">
                     <dx-text-box style="display: none" />
-                    <span v-if="topSelectedUnits.length" class="unit-count-badge">
+                    <!-- <span v-if="topSelectedUnits.length" class="unit-count-badge">
                       {{ topSelectedUnits.length }}
-                    </span>
+                    </span> -->
                     <div class="unit-tag-container">
                       <span
                         v-for="unit in topSelectedUnits.slice(-1)"
@@ -134,13 +135,11 @@
           </div>
         </div>
 
-        <!-- Tính chất & Chịu thuế -->
+        <!-- Tính chất & Chịu thuế / Giảm trừ -->
         <div class="salary-composition-form-row">
-          <div class="salary-composition-form-label">
-            Tính chất <span>*</span>
-          </div>
+          <div class="salary-composition-form-label">Tính chất <span>*</span></div>
           <div
-            class="salary-composition-form-input-wrapper-flex flex-wrap"
+            class="salary-composition-form-input-wrapper flex-wrap"
             style="align-items: center; gap: 20px"
           >
             <ms-select
@@ -153,31 +152,30 @@
               class="w-300"
               :error="errors.salaryCompositionNature"
             />
-            <div class="radio-group">
+            <!-- Radio Group chịu thuế: Chỉ hiện khi chọn Thu nhập (1) -->
+            <div v-if="formData.salaryCompositionNature === 1" class="radio-group">
               <a-radio-group v-model:value="formData.isTaxable">
-                <a-radio :value="1">Chịu thuế</a-radio>
-                <a-radio :value="2">Miễn thuế toàn phần</a-radio>
-                <a-radio :value="3">Miễn thuế một phần</a-radio>
+                <a-radio :value="0">Chịu thuế</a-radio>
+                <a-radio :value="1">Miễn thuế toàn phần</a-radio>
+                <a-radio :value="2">Miễn thuế một phần</a-radio>
               </a-radio-group>
             </div>
-          </div>
-        </div>
-
-        <!-- Giảm trừ khi tính thuế -->
-        <div class="salary-composition-form-row">
-          <div class="salary-composition-form-label">Giảm trừ khi tính thuế</div>
-          <div class="salary-composition-form-input-wrapper">
-            <a-checkbox v-model:checked="formData.isTaxDeductible">
-              Giảm trừ khi tính thuế thu nhập cá nhân
-            </a-checkbox>
+            <!-- Checkbox giảm trừ: Chỉ hiện khi chọn Khấu trừ (2) -->
+            <div v-if="formData.salaryCompositionNature === 2" class="checkbox-group">
+              <a-checkbox v-model:checked="formData.isTaxDeductible">
+                Giảm trừ khi tính thuế
+              </a-checkbox>
+            </div>
           </div>
         </div>
 
         <!-- Định mức -->
         <div
-          v-if="formData.salaryCompositionType !== CompositionType.TIMEKEEPING &&
-                formData.salaryCompositionType !== CompositionType.KPI &&
-                formData.salaryCompositionType !== CompositionType.PRODUCT"
+          v-if="
+            formData.salaryCompositionType !== CompositionType.TIMEKEEPING &&
+            formData.salaryCompositionType !== CompositionType.KPI &&
+            formData.salaryCompositionType !== CompositionType.PRODUCT
+          "
           class="salary-composition-form-row"
         >
           <div class="salary-composition-form-label">Định mức</div>
@@ -223,7 +221,7 @@
           <div class="salary-composition-form-label">Giá trị</div>
           <div
             class="salary-composition-form-input-wrapper flex-column align-start"
-            style="gap: 12px; width: 100%"
+            style="gap: 12px"
           >
             <a-radio-group
               v-model:value="formData.valueOption"
@@ -231,20 +229,10 @@
               style="width: 100%; display: flex; flex-direction: column"
             >
               <!-- Option 1 -->
-              <div
-                class="value-option-row"
-                style="display: flex; flex-direction: column; width: 100%"
-              >
+              <div class="value-option-row" style="display: flex; flex-direction: column">
                 <a-radio :value="1">Tự động cộng tổng giá trị của các nhân viên</a-radio>
                 <div
-                  v-if="formData.valueOption === 1"
-                  style="
-                    margin-top: 8px;
-                    margin-left: 24px;
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                  "
+                  style="margin-top: 10px; display: flex; align-items: center; gap: 8px"
                 >
                   <ms-select
                     v-model="formData.sumGroup"
@@ -254,25 +242,18 @@
                       { label: 'Thuộc cơ cấu tổ chức', value: 3 },
                     ]"
                     class="w-300"
+                    :disabled="formData.valueOption !== 1"
                   />
                   <i class="icon-info-gray" title="Thông tin thêm"></i>
                 </div>
               </div>
               <!-- Option 2 -->
-              <div
-                class="value-option-row"
-                style="display: flex; flex-direction: column; width: 100%"
-              >
+              <div class="value-option-row" style="display: flex; flex-direction: column">
                 <a-radio :value="0">Tính theo công thức tự đặt</a-radio>
                 <div
                   v-if="formData.valueOption === 0"
                   class="formula-container"
-                  style="
-                    margin-top: 8px;
-                    margin-left: 24px;
-                    position: relative;
-                    width: calc(100% - 24px);
-                  "
+                  style="margin-top: 10px; position: relative; width: calc(100% - 24px)"
                 >
                   <textarea
                     v-model="formData.valueFormula"
@@ -301,9 +282,7 @@
 
         <!-- Hiển thị trên phiếu lương -->
         <div class="salary-composition-form-row">
-          <div class="salary-composition-form-label">
-            Hiển thị trên phiếu lương
-          </div>
+          <div class="salary-composition-form-label">Hiển thị trên phiếu lương</div>
           <div class="salary-composition-form-input-wrapper">
             <a-radio-group v-model:value="formData.displayOnPayslip">
               <a-radio :value="1">Có</a-radio>
@@ -398,13 +377,12 @@ const props = defineProps({
   },
 })
 
-
 const showExitModal = ref(false)
 const initialDataString = ref('')
 
 let formData = reactive({
   salaryCompositionId: null,
-  salaryCompositionType: null,　//loại thành phần
+  salaryCompositionType: null, //loại thành phần
   salaryCompositionCode: '',
   salaryCompositionName: '',
   unitId: null,
@@ -488,7 +466,7 @@ watch(
 )
 
 const creationSourceLabel = computed(() => {
-  return formData.creationSource === 2 ? 'Hệ thống' : 'Tự thêm'
+  return formData.creationSource === 2 ? 'Mặc định' : 'Tự thêm'
 })
 
 /**
@@ -499,9 +477,7 @@ const fetchReferenceData = async () => {
     const unitsRes = await SalaryCompositionUnitApi.getAll()
     rawUnits.value = unitsRes.data
     // ?
-    formData.unitIds = formData.unitIds.filter((id) =>
-      rawUnits.value.some((u) => u.unitId === id)
-    )
+    formData.unitIds = formData.unitIds.filter((id) => rawUnits.value.some((u) => u.unitId === id))
   } catch (error) {
     console.error('Lỗi khi lấy dữ liệu don vi:', error)
   }
@@ -518,8 +494,6 @@ const errors = reactive({
   salaryCompositionType: '',
   salaryCompositionNature: '',
 })
-
-
 
 /**
  * Kiểm tra tính hợp lệ của dữ liệu trên form
@@ -576,11 +550,15 @@ const validate = async () => {
   return isValid
 }
 
-watch(() => formData.unitIds, (newVal) => {
-  if (newVal && newVal.length > 0) {
-    errors.unitId = ''; // Xóa thông báo lỗi ngay lập tức
-  }
-}, { deep: true });
+watch(
+  () => formData.unitIds,
+  (newVal) => {
+    if (newVal && newVal.length > 0) {
+      errors.unitId = '' // Xóa thông báo lỗi ngay lập tức
+    }
+  },
+  { deep: true }
+)
 
 /**
  * Xử lý sự kiện blur ô tên món để tự động sinh mã món
@@ -717,7 +695,7 @@ watch(
       formData.unitId = val.unitId || val.UnitId || null
       formData.unitIds =
         val.unitIds || val.UnitIds || (val.unitId || val.UnitId ? [val.unitId || val.UnitId] : [])
-      
+
       // Map legacy values to int
       if (val.isTaxable === 'taxable') formData.isTaxable = 0
       else if (val.isTaxable === 'exempt_full') formData.isTaxable = 1
@@ -726,7 +704,7 @@ watch(
 
       formData.description = val.description || val.Description || ''
       formData.isTaxDeductible = val.isTaxDeductible ?? val.IsTaxDeductible ?? false
-      
+
       if (val.status === 'active') formData.status = 1
       else if (val.status === 'inactive') formData.status = 2
       else formData.status = val.status ?? 1
@@ -758,7 +736,7 @@ watch(
       else formData.displayOnPayslip = val.displayOnPayslip ?? 1
 
       if (val.creationSource === 'Tự thêm') formData.creationSource = 1
-      else if (val.creationSource === 'Hệ thống') formData.creationSource = 2
+      else if (val.creationSource === 'Hệ thống' || val.creationSource === 'Mặc định') formData.creationSource = 2
       else formData.creationSource = val.creationSource ?? 1
     } else {
       clearForm()
@@ -802,6 +780,22 @@ watch(
   }
 )
 watch(
+  () => formData.unitIds,
+  (newVal) => {
+    if (treeViewRef.value) {
+      const instance = treeViewRef.value.instance
+      if (instance) {
+        if (!newVal || newVal.length === 0) {
+          instance.unselectAll()
+        } else {
+          instance.option('selectedItemKeys', newVal)
+        }
+      }
+    }
+  },
+  { deep: true }
+)
+watch(
   () => formData.salaryCompositionType,
   (val) => {
     if (val) errors.salaryCompositionType = ''
@@ -819,6 +813,16 @@ watch(
   () => formData.salaryCompositionNature,
   (val) => {
     if (val) errors.salaryCompositionNature = ''
+    if (val === 1) {
+      formData.isTaxDeductible = false
+      formData.isTaxable = 0
+    } else if (val === 2) {
+      formData.isTaxable = 0
+      formData.isTaxDeductible = false
+    } else {
+      formData.isTaxable = 0
+      formData.isTaxDeductible = false
+    }
   }
 )
 </script>
@@ -863,6 +867,10 @@ watch(
 
 .flex-column {
   flex-direction: column;
+}
+
+.align-start {
+  align-items: flex-start !important;
 }
 
 .flex-wrap {

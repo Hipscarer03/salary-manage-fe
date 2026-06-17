@@ -4,7 +4,7 @@ input {
     border: 1px solid var( --border-control-color);
     height: 32px;
     outline : none;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 0 10px; 
 }
 /* //check padding mặc định của input */

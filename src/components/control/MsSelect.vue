@@ -89,7 +89,7 @@ const updateValue = (value) => {
 :deep(.ant-select-selector) {
   border-radius: 8px !important;
   border-color: rgb(219, 219, 219)  !important;
-  height: 36px !important;
+  height: 32px !important;
   display: flex;
   align-items: center;
 }

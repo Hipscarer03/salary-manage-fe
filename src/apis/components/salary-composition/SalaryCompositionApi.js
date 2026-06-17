@@ -48,7 +48,7 @@ function mapToBackend(item) {
     organizationUnitIds: item.unitIds || (item.unitId ? [item.unitId] : []),
     organizationUnitName: item.unitName,
     isTaxDeductible: item.isTaxDeductible ? 1 : 0,
-    creationSource: item.creationSource === 'Hệ thống' || item.creationSource === 2 ? 2 : 1,
+    creationSource: item.creationSource === 'Hệ thống' || item.creationSource === 'Mặc định' || item.creationSource === 2 ? 2 : 1,
     status: item.status === 'inactive' || item.status === 2 ? 2 : 1
   }
 }

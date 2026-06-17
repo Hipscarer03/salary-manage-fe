@@ -27,7 +27,8 @@
 }
 
 .salary-composition-form-back-btn:hover {
-  border: 1px solid #2680eb;
+  background-color: #f5f5f5;
+  border-radius: 50%;
 }
 
 .salary-composition-form-back-btn i {
@@ -174,7 +175,7 @@
 
 .salary-composition-form-label {
   width: 200px;
-  font-size: 14px;
+  font-size: 13px;
   color: #212121;
   padding-top: 8px;
 }
@@ -193,7 +194,7 @@
 .salary-composition-form-input-wrapper select,
 .salary-composition-form-input-wrapper textarea {
   width: 100%;
-  height: 36px;
+  height: 32px;
   border: 1px solid #dcdfe6;
   border-radius: 8px;
   padding: 0 12px;

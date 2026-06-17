@@ -133,14 +133,74 @@
               />
 
               <div style="width: 350px; flex-shrink: 0">
-                <ms-combobox
-                  v-model="unitFilter"
-                  :options="unitFilterOptions"
+                <dx-drop-down-box
+                  v-model:value="unitFilter"
+                  value-expr="unitId"
+                  display-expr="unitName"
                   placeholder="Tất cả đơn vị"
-                  mode="multiple"
-                  :max-tag-count="2"
-                  allow-clear
-                />
+                  :show-clear-button="true"
+                  :data-source="treeDataSource"
+                  style="width: 100%; background-color: #ffffff; border-radius: 8px"
+                  class="tree-dropdown-box"
+                  field-template="field"
+                >
+                  <!-- Hiện giá trị đã chọn -->
+                  <template #field="{ value }">
+                    <div class="unit-tag-field">
+                      <dx-text-box style="display: none" />
+                      <!-- <span v-if="topSelectedUnits.length" class="unit-count-badge">
+                        {{ topSelectedUnits.length }}
+                      </span> -->
+                      <div class="unit-tag-container">
+                        <span
+                          v-for="unit in topSelectedUnits.slice(-1)"
+                          :key="unit.unitId"
+                          class="unit-tag"
+                        >
+                          {{ unit.unitName }}
+                          <span
+                            class="unit-tag-remove"
+                            @click.stop="removeUnit(unit.unitId)"
+                            title="Xóa"
+                            >×</span
+                          >
+                        </span>
+                        <span v-if="!topSelectedUnits.length" class="unit-placeholder"
+                          >Tất cả đơn vị</span
+                        >
+                      </div>
+                    </div>
+                  </template>
+
+                  <template #content>
+                    <div class="tree-dropdown-content">
+                      <div class="tree-view-wrapper">
+                        <dx-tree-view
+                          ref="treeViewRef"
+                          :data-source="treeDataSource"
+                          data-structure="plain"
+                          key-expr="unitId"
+                          parent-id-expr="parentUnitId"
+                          display-expr="unitName"
+                          selection-mode="multiple"
+                          show-check-boxes-mode="normal"
+                          :select-nodes-recursive="true"
+                          :select-by-click="true"
+                          :selected-item-keys="unitFilter"
+                          @item-selection-changed="
+                            (e) => (unitFilter = e.component.getSelectedNodeKeys())
+                          "
+                        />
+                      </div>
+                      <div class="tree-dropdown-footer">
+                        <label class="inactive-checkbox-label">
+                          <input type="checkbox" v-model="showInactiveUnits" />
+                          Hiển thị đơn vị ngừng theo dõi
+                        </label>
+                      </div>
+                    </div>
+                  </template>
+                </dx-drop-down-box>
               </div>
             </template>
           </div>
@@ -173,7 +233,10 @@
               "
             >
               <template #bodyCell="{ column, record }">
-                <template v-if="column.key === 'salaryCompositionType'">
+                <template v-if="column.key === 'unitIds'">
+                  {{ getAppliedUnitsLabel(record) }}
+                </template>
+                <template v-else-if="column.key === 'salaryCompositionType'">
                   {{ CompositionTypeName[record.salaryCompositionType] || '-' }}
                 </template>
                 <template v-else-if="column.key === 'salaryCompositionNature'">
@@ -364,6 +427,15 @@
                 <template v-else-if="column.key === 'valueType'">
                   {{ record.valueType }}
                 </template>
+                <template v-else-if="column.key === 'creationSource'">
+                  {{
+                    record.creationSource === 1
+                      ? 'Tự thêm'
+                      : record.creationSource === 2
+                      ? 'Mặc định'
+                      : '-'
+                  }}
+                </template>
                 <template v-else-if="column.key === 'actionUse'">
                   <div style="display: flex; justify-content: center; align-items: center">
                     <span
@@ -463,7 +535,7 @@
     <div v-if="showConfirm" class="confirm-modal" @click.self="showConfirm = false">
       <div class="confirm-modal-content">
         <div class="confirm-modal-header-container">
-          <div class="confirm-modal-title">MISA AMIS Tiền lương - Quản lý thành phần lương</div>
+          <div class="confirm-modal-title">Xóa thành phần lương</div>
           <div
             class="confirm-modal-close"
             @click="
@@ -477,9 +549,9 @@
           </div>
         </div>
         <div class="confirm-modal-body">
-          Bạn có chắc chắn muốn xóa thành phần lương &lt;{{
+          Bạn có chắc chắn muốn xóa thành phần lương <strong>{{
             selectedItem?.salaryCompositionName
-          }}&gt; không?
+          }}</strong> không?
         </div>
         <div class="confirm-modal-actions">
           <button
@@ -491,7 +563,7 @@
               }
             "
           >
-            Hủy
+            Hủy bỏ
           </button>
           <button class="confirm-modal-delete" @click="handleDelete">Xóa</button>
         </div>
@@ -502,7 +574,7 @@
     <div v-if="showStatusConfirm" class="confirm-modal" @click.self="showStatusConfirm = false">
       <div class="confirm-modal-content">
         <div class="confirm-modal-header-container">
-          <div class="confirm-modal-title">MISA AMIS Tiền lương - Xác nhận thay đổi trạng thái</div>
+          <div class="confirm-modal-title">Chuyển trạng thái</div>
           <div
             class="confirm-modal-close"
             @click="
@@ -516,11 +588,9 @@
           </div>
         </div>
         <div class="confirm-modal-body">
-          Bạn có chắc chắn muốn đổi trạng thái của thành phần lương &lt;{{
+          Bạn có chắc chắn muốn chuyển trạng thái thành phần lương <strong>{{
             selectedItem?.salaryCompositionName
-          }}&gt; sang
-          <strong>{{ selectedItem?.status === 1 ? 'Ngừng theo dõi' : 'Đang theo dõi' }}</strong>
-          không?
+          }}</strong> sang {{ selectedItem?.status === 1 ? 'ngừng theo dõi' : 'đang theo dõi' }} không?
         </div>
         <div class="confirm-modal-actions">
           <button
@@ -532,7 +602,7 @@
               }
             "
           >
-            Hủy
+            Hủy bỏ
           </button>
           <button
             class="confirm-modal-delete"
@@ -553,7 +623,7 @@
     >
       <div class="confirm-modal-content">
         <div class="confirm-modal-header-container">
-          <div class="confirm-modal-title">MISA AMIS Tiền lương - Quản lý thành phần lương</div>
+          <div class="confirm-modal-title">Xóa thành phần lương</div>
           <div class="confirm-modal-close" @click="showBulkDeleteConfirm = false">
             <i class="icon-x-gray-small"></i>
           </div>
@@ -562,7 +632,7 @@
           Bạn có chắc chắn muốn xóa những thành phần lương đã chọn không?
         </div>
         <div class="confirm-modal-actions">
-          <button class="confirm-modal-cancel" @click="showBulkDeleteConfirm = false">Hủy</button>
+          <button class="confirm-modal-cancel" @click="showBulkDeleteConfirm = false">Hủy bỏ</button>
           <button class="confirm-modal-delete" @click="handleBulkDelete">Xóa</button>
         </div>
       </div>
@@ -576,18 +646,17 @@
     >
       <div class="confirm-modal-content">
         <div class="confirm-modal-header-container">
-          <div class="confirm-modal-title">MISA AMIS Tiền lương - Xác nhận thay đổi trạng thái</div>
+          <div class="confirm-modal-title">Chuyển trạng thái</div>
           <div class="confirm-modal-close" @click="showBulkStatusConfirm = false">
             <i class="icon-x-gray-small"></i>
           </div>
         </div>
         <div class="confirm-modal-body">
-          Bạn có chắc chắn muốn đổi trạng thái của các thành phần lương đã chọn sang
-          <strong>{{ bulkTargetStatus === 1 ? 'Đang theo dõi' : 'Ngừng theo dõi' }}</strong>
-          không?
+          Bạn có chắc chắn muốn chuyển trạng thái thành phần lương đã chọn sang
+          {{ bulkTargetStatus === 1 ? 'đang theo dõi' : 'ngừng theo dõi' }} không?
         </div>
         <div class="confirm-modal-actions">
-          <button class="confirm-modal-cancel" @click="showBulkStatusConfirm = false">Hủy</button>
+          <button class="confirm-modal-cancel" @click="showBulkStatusConfirm = false">Hủy bỏ</button>
           <button
             class="confirm-modal-delete"
             style="background-color: #0e9a62 !important"
@@ -806,6 +875,13 @@ const columns = [
     ellipsis: true,
   },
   {
+    title: 'Đơn vị áp dụng',
+    dataIndex: 'unitIds',
+    key: 'unitIds',
+    width: 250,
+    ellipsis: true,
+  },
+  {
     title: 'Loại thành phần',
     dataIndex: 'salaryCompositionType',
     key: 'salaryCompositionType',
@@ -948,6 +1024,14 @@ const removeUnit = (unitId) => {
   unitFilter.value = unitFilter.value.filter((id) => !toRemove.has(id))
 }
 
+const getAppliedUnitsLabel = (record) => {
+  if (!record.unitIds || !record.unitIds.length) return '-'
+  const names = record.unitIds
+    .map((id) => rawUnits.value.find((u) => u.unitId === id)?.unitName)
+    .filter(Boolean)
+  return names.length ? names.join(', ') : '-'
+}
+
 const getNatureLabel = (record) => {
   if (record.salaryCompositionNature === 1 || record.salaryCompositionNature === '1')
     return 'Thu nhập'
@@ -1083,6 +1167,23 @@ watch([pageNumber, sort], () => {
 watch([pageSize, keyword, statusFilter, unitFilter], () => {
   pageNumber.value = 1
 })
+
+watch(
+  () => unitFilter.value,
+  (newVal) => {
+    if (treeViewRef.value) {
+      const instance = treeViewRef.value.instance
+      if (instance) {
+        if (!newVal || newVal.length === 0) {
+          instance.unselectAll()
+        } else {
+          instance.option('selectedItemKeys', newVal)
+        }
+      }
+    }
+  },
+  { deep: true }
+)
 
 defineProps({
   isToggle: Boolean,
@@ -1836,7 +1937,7 @@ const handleBulkDelete = async () => {
   gap: 4px;
   align-items: center;
   flex: 1;
-  min-height: 36px;
+  min-height: 32px;
   padding: 2px 0;
 }
 
@@ -1844,10 +1945,10 @@ const handleBulkDelete = async () => {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  background-color: #edfcf4;
-  color: #0e9a62;
-  border: 1px solid #b7f0d5;
-  border-radius: 4px;
+  background-color: #f5f5f5;
+  color: #101828;
+  border: 1px solid #d5d7da;
+  border-radius: 8px;
   padding: 1px 6px 1px 8px;
   font-size: 12px;
   font-weight: 500;
@@ -1859,7 +1960,7 @@ const handleBulkDelete = async () => {
   cursor: pointer;
   font-size: 15px;
   line-height: 1;
-  color: #0e9a62;
+  color: #101828;
   opacity: 0.7;
   padding: 0 2px;
   border-radius: 2px;
@@ -1868,8 +1969,8 @@ const handleBulkDelete = async () => {
 
 .unit-tag-remove:hover {
   opacity: 1;
-  color: #ef4444;
-  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 50%;
+  background-color: rgba(200, 200, 200, 0.5);
 }
 
 .unit-placeholder {
@@ -1896,7 +1997,7 @@ const handleBulkDelete = async () => {
 
 .tree-dropdown-box .dx-texteditor-container {
   cursor: pointer;
-  min-height: 36px;
+  min-height: 32px;
   display: flex;
   align-items: center;
   border-radius: 8px !important;
@@ -1905,7 +2006,7 @@ const handleBulkDelete = async () => {
 /* Đảm bảo field-template mở rộng đầy đủ */
 .tree-dropdown-box .dx-dropdowneditor-field-template-wrapper {
   width: 100%;
-  min-height: 36px;
+  min-height: 32px;
   display: flex;
   align-items: center;
 }
@@ -1914,7 +2015,7 @@ const handleBulkDelete = async () => {
 .tree-dropdown-box .dx-texteditor-input-container {
   display: flex !important;
   flex: 1;
-  min-height: 36px;
+  min-height: 32px;
   align-items: center;
   overflow: hidden;
   width: 100%;
@@ -1969,6 +2070,32 @@ const handleBulkDelete = async () => {
 .dx-treeview-item-without-checkbox.dx-state-focused > .dx-treeview-item {
   color: #0e9a62;
   background-color: #edfcf4;
+}
+
+/* Background và chữ cho dòng đã tích (không bôi hết dòng) */
+.tree-dropdown-content .dx-treeview-node[aria-selected='true'] > .dx-treeview-item,
+.tree-dropdown-content .dx-treeview-node.dx-state-selected > .dx-treeview-item {
+  background-color: #edfcf4 !important;
+  color: #0e9a62 !important;
+}
+
+/* Background khi hover dòng */
+.tree-dropdown-content .dx-treeview-item:hover,
+.tree-dropdown-content .dx-treeview-node.dx-state-hover > .dx-treeview-item {
+  background-color: #cdeadf !important;
+  color: #0e9a62 !important;
+}
+
+.dx-icon-clear {
+  mask: url('/Icon.svg') no-repeat -163px -548px;
+  background-color: #70707e;
+  top: 85% !important;
+  left: 55% !important;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Bulk Action Toolbar Styles */
@@ -2048,17 +2175,28 @@ const handleBulkDelete = async () => {
   background-color: #fff5f5;
 }
 
+.salary-composition-table .ant-table-measure-row,
 .ant-table-measure-row {
   visibility: hidden !important;
   height: 0 !important;
   line-height: 0 !important;
 }
 
+.salary-composition-table .ant-table-measure-row td,
 .ant-table-measure-row td {
   padding: 0 !important;
   border: none !important;
   height: 0 !important;
   line-height: 0 !important;
+}
+
+.salary-composition-table .ant-table-measure-row td div,
+.ant-table-measure-row td div {
+  height: 0 !important;
+  line-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
 }
 
 /* .ant-table-body {
